@@ -40,13 +40,13 @@ Item {
                }
     focus: false
     // concreate model
-    model: listModel
+    model: mplayer.channels
     // provide delegate component.
     delegate: Text {
                 id: channelItem
                 font.pixelSize: 40
                 // delegate can direclty use ListElement role name
-                text: channelName
+                text: modelData
                 MouseArea {
                   anchors.fill: parent
                   onDoubleClicked: {
