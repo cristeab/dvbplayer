@@ -1,4 +1,6 @@
 import QtQuick 1.1
+import QtProcess 0.1
+
 Item {
   id: rootItem
   width: 640
@@ -20,6 +22,14 @@ Item {
     ListElement { channelName: "M6HD"}
     ListElement { channelName: "MCS"}
   }
+  //create process element
+  Process {
+    id: mplayer
+    program: "mplayer"
+    onReadyReadStandardError: {
+      console.log(readAllStandardError())
+    }
+  }
   ListView {
     id: sampleListView
     anchors.fill: parent
@@ -28,15 +38,24 @@ Item {
                 radius: 5
                 width: sampleListView.currentItem.width
                }
-    focus: true
+    focus: false
     // concreate model
     model: listModel
     // provide delegate component.
     delegate: Text {
-                id: itexItem
+                id: channelItem
                 font.pixelSize: 40
                 // delegate can direclty use ListElement role name
                 text: channelName
+                MouseArea {
+                  anchors.fill: parent
+                  onDoubleClicked: {
+                    sampleListView.currentIndex = index
+                    mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
+                    mplayer.kill()
+                    mplayer.start()
+                  }
+                }
               }
     spacing: 4
   }
