@@ -6,9 +6,15 @@ Description
 -----------
 
 This KDE plasmoid uses mplayer in order to play digital content from a dvb tunner device. It is written
-in C++ and Qt/QML. The channels are read from /etc/mplayer/channels.conf file that must be generated 
+in C++ and Qt/QML. 
+
+![DVB Player Screenshot](dvbplayer.png)
+
+The channels are read from /etc/mplayer/channels.conf file that must be generated 
 using dvb-t_scanner utility (https://github.com/cristeab/dvb-t_scanner). Double click a channel name 
-on the list to start playing, double click again to stop playing the current channel.
+on the list to start playing, double click again to stop playing the current channel. mplayer is started 
+with the following arguments:
+ mplayer -ao sdl dvb://"channel name"
 
 
 Plugin Compilation and Installation
