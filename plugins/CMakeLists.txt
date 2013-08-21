@@ -6,8 +6,8 @@ find_package(Qt4 4.8.0 REQUIRED)
 
 include_directories(${QT_QTCORE_INCLUDE_DIR} ${CMAKE_BINARY_DIR})
 
-set(QtProcess_SRCS process.cpp qtprocess_plugin.cpp)
-set(QtProcess_HDRS process.h qtprocess_plugin.h)
+set(QtProcess_SRCS process.cpp process_p.cpp qtprocess_plugin.cpp)
+set(QtProcess_HDRS process.h process_p.h qtprocess_plugin.h)
 
 QT4_WRAP_CPP(MOCS ${QtProcess_HDRS})
 
