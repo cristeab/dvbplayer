@@ -4,11 +4,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
   id: rootItem
-  width: 320
-  height: 5*(listView.currentItem.height+listView.spacing)-listView.spacing
 
-  property int minimumWidth: width
-  property int minimumHeight: height
   property int oldIndex: -1
 
   PlasmaCore.Theme {
@@ -32,6 +28,7 @@ Item {
      id: highlightBar
      Rectangle {
        width: listView.currentItem.width
+       height: listView.currentItem.height
        color: theme.highlightColor
        y: listView.currentItem.y;
        Behavior on y {
@@ -45,7 +42,7 @@ Item {
     id: listView
     anchors.fill: parent
     highlight: highlightBar
-    highlightFollowsCurrentItem: false
+    highlightFollowsCurrentItem: true
     highlightMoveSpeed: 2000
     // concreate model
     model: mplayer.channels
@@ -61,7 +58,6 @@ Item {
                   onDoubleClicked: {
                     mplayer.kill()
                     if (oldIndex != index) {
-                      listView.highlightFollowsCurrentItem = true
                       listView.currentIndex = index
                       mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                       mplayer.start()
