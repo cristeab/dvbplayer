@@ -1,12 +1,19 @@
 import QtQuick 1.1
 import QtProcess 0.1
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
   id: rootItem
   width: 320
   height: 5*(listView.currentItem.height+listView.spacing)-listView.spacing
 
+  property int minimumWidth: width
+  property int minimumHeight: height
   property int oldIndex: -1
+
+  PlasmaCore.Theme {
+    id: theme
+  }
 
   //create process element
   Process {
@@ -23,7 +30,7 @@ Item {
     id: listView
     anchors.fill: parent
     highlight: Rectangle {
-                color: "lightgray"
+                color: theme.highlightColor
                 radius: 5
                 width: listView.currentItem.width
               }
@@ -34,7 +41,8 @@ Item {
     // provide delegate component.
     delegate: Text {
                 id: channelItem
-                font.pixelSize: 40
+                font.pixelSize: 30
+                color: theme.textColor
                 // delegate can direclty use ListElement role name
                 text: modelData
                 MouseArea {
