@@ -1,15 +1,18 @@
-      DVB-T/DAB-T player
+DVB-T/DAB-T player
+=================
 
 
-  Description
+Description
+-----------
 
-This KDE plasmoid uses mplayer in order to play digital content from a dvb tunner device. The channels
-are read from /etc/mplayer/channels.conf file that must be generated using dvb-t_scanner utility
-(https://github.com/cristeab/dvb-t_scanner). Double click a channel name on the list to start playing
-, double click again to stop playing the current channel.
+This KDE plasmoid uses mplayer in order to play digital content from a dvb tunner device. It is written
+in C++ and Qt/QML. The channels are read from /etc/mplayer/channels.conf file that must be generated 
+using dvb-t_scanner utility (https://github.com/cristeab/dvb-t_scanner). Double click a channel name 
+on the list to start playing, double click again to stop playing the current channel.
 
 
-  Plugin Compilation and Installation
+Plugin Compilation and Installation
+-----------------------------------
 
 A QML plugin (shared library) is needed in order to start mplayer process and read the channel configuration
 file. From the main directory of the project:
@@ -21,7 +24,8 @@ file. From the main directory of the project:
  sudo make install
 
 
-  Plasmoid Package Creation and Installation
+ Plasmoid Package Creation and Installation
+ ------------------------------------------
 
 From the main directory of the project:
  cd plasmoid
