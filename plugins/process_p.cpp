@@ -1,5 +1,6 @@
 #include <QFile>
 #include <QSet>
+#include <QTextCodec>
 #include "process_p.h"
 
 Process::Private::Private(Process *parent)
@@ -24,9 +25,15 @@ void Process::Private::loadChannels()
     return;
   }
   QSet<QString> channelSet;
+  QTextCodec *codec = QTextCodec::codecForLocale();
+  if (NULL == codec) {
+    qDebug() << "Cannot get locale codec";
+    return;
+  }
   while (!file.atEnd()) {
-    QString line = file.readLine();
-    QStringList token = line.split(':');
+    QByteArray line = file.readLine();
+    QString conv_line = codec->toUnicode(line);
+    QStringList token = conv_line.split(':');
     channelSet << token[0];
   }
   channels = channelSet.toList();
