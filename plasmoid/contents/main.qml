@@ -20,7 +20,7 @@ Item {
     id: mplayer
     program: "mplayer"
     onReadyReadStandardError: {
-      console.log(readAllStandardError())
+      //console.log(readAllStandardError())
     }
     onReadyReadStandardOutput: {
       //console.log(readAllStandardOutput())
@@ -45,14 +45,14 @@ Item {
     id: listView
     anchors.fill: parent
     highlight: highlightBar
-    highlightFollowsCurrentItem: true
+    highlightFollowsCurrentItem: false
     highlightMoveSpeed: 2000
     // concreate model
     model: mplayer.channels
     // provide delegate component.
     delegate: Text {
                 id: channelItem
-                font.pixelSize: 30
+                font.pixelSize: 24
                 color: theme.textColor
                 // delegate can direclty use ListElement role name
                 text: modelData
@@ -61,6 +61,7 @@ Item {
                   onDoubleClicked: {
                     mplayer.kill()
                     if (oldIndex != index) {
+                      listView.highlightFollowsCurrentItem = true
                       listView.currentIndex = index
                       mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                       mplayer.start()
@@ -75,5 +76,6 @@ Item {
     snapMode: ListView.SnapToItem
     focus: true
     keyNavigationWraps: true
+    clip: true
   }
 }
