@@ -11,9 +11,10 @@ in C++ and Qt/QML.
 ![DVB Player Screenshot](dvbplayer.png)
 
 The channels are read from /etc/mplayer/channels.conf file that must be generated 
-using dvb-t_scanner utility (https://github.com/cristeab/dvb-t_scanner). Double click a channel name 
-on the list to start playing, double click again to stop playing the current channel. mplayer is started 
+using [dvb-t_scanner utility](https://github.com/cristeab/dvb-t_scanner). Double click a channel name 
+on the list to start playing, double click again to stop playing. mplayer is started 
 with the following arguments:
+
  mplayer -ao sdl dvb://"channel name"
 
 
@@ -22,6 +23,7 @@ Plugin Compilation and Installation
 
 A QML plugin (shared library) is needed in order to start mplayer process and read the channel configuration
 file. From the main directory of the project:
+
  cd plugins
  mkdir build
  cd build
@@ -30,10 +32,11 @@ file. From the main directory of the project:
  sudo make install
 
 
- Plasmoid Package Creation and Installation
- ------------------------------------------
+Plasmoid Package Creation and Installation
+------------------------------------------
 
 From the main directory of the project:
+
  cd plasmoid
  zip -r ../dvbplayer.plasmoid .
  plasmapkg -i dvbplayer.plasmoid
