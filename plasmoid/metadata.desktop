@@ -1,0 +1,22 @@
+[Desktop Entry]
+Name=dvbplayer
+Comment=Uses mplayer to play DVB/DAB digital content from /etc/mplayer/channels.conf.
+Icon=icon.png
+
+Keywords=DVB-T DAB-T mplayer
+Encoding=UTF-8
+Type=Service
+
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Bogdan Cristea
+X-KDE-PluginInfo-Email=cristeab@gmail.com
+X-KDE-PluginInfo-Category=Multimedia
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=dvbplayer
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=https://github.com/Joker/timekeeper
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=320,240
+X-Plasma-MainScript=main.qml
+X-Plasma-RemoteLocation=
