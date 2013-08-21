@@ -5,7 +5,7 @@ DVB-T/DAB-T player
 Description
 -----------
 
-This KDE plasmoid uses mplayer in order to play digital content from a DVB-T tunner. It is written
+This simple KDE plasmoid uses mplayer in order to play digital content from a DVB-T tunner. It is written
 in C++ and Qt/QML. 
 
 ![DVB Player Screenshot](dvbplayer.png)
@@ -21,7 +21,7 @@ with the following arguments:
 Plugin Compilation and Installation
 -----------------------------------
 
-A QML plugin (shared library) is needed in order to start mplayer process and read the channel configuration
+A QML plugin (shared library) is needed in order to control mplayer process and read the channel configuration
 file. From the main directory of the project:
 
     cd plugins
