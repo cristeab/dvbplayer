@@ -46,6 +46,8 @@ Item {
                       mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                       mplayer.start()
                       oldIndex = index
+                    } else {
+                      oldIndex = -1
                     }
                   }
                 }
