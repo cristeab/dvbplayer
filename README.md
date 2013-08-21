@@ -15,7 +15,7 @@ using [dvb-t_scanner utility](https://github.com/cristeab/dvb-t_scanner). Double
 on the list to start playing, double click again to stop playing. mplayer is started 
 with the following arguments:
 
- mplayer -ao sdl dvb://"channel name"
+    mplayer -ao sdl dvb://"channel name"
 
 
 Plugin Compilation and Installation
@@ -24,19 +24,19 @@ Plugin Compilation and Installation
 A QML plugin (shared library) is needed in order to start mplayer process and read the channel configuration
 file. From the main directory of the project:
 
- cd plugins
- mkdir build
- cd build
- cmake ..
- make
- sudo make install
+    cd plugins
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
 
 
 Plasmoid Package Creation and Installation
 ------------------------------------------
 
-From the main directory of the project:
+In order to install the plasmoid on local kde folder, from the main directory of the project:
 
- cd plasmoid
- zip -r ../dvbplayer.plasmoid .
- plasmapkg -i dvbplayer.plasmoid
+    cd plasmoid
+    zip -r ../dvbplayer.plasmoid .
+    plasmapkg -i dvbplayer.plasmoid
