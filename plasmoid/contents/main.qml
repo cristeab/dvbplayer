@@ -36,12 +36,19 @@ Item {
        }
      }
    }
+   Component {
+    id: emptyHighlightBar
+    Rectangle {
+      width: listView.currentItem.width
+      height: listView.currentItem.height
+      color: theme.viewBackgroundColor
+    }
+   }
 
   //channel list
   ListView {
     id: listView
     anchors.fill: parent
-    highlight: highlightBar
     highlightFollowsCurrentItem: true
     highlightMoveSpeed: 2000
     // concreate model
@@ -58,11 +65,13 @@ Item {
                   onDoubleClicked: {
                     mplayer.kill()
                     if (oldIndex != index) {
+                      listView.highlight = highlightBar
                       listView.currentIndex = index
                       mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                       mplayer.start()
                       oldIndex = index
                     } else {
+                      listView.highlight = emptyHighlightBar
                       oldIndex = -1
                     }
                   }
