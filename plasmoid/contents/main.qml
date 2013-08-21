@@ -26,14 +26,25 @@ Item {
       //console.log(readAllStandardOutput())
     }
   }
+
+  //highligh component
+   Component {
+     id: highlightBar
+     Rectangle {
+       width: listView.currentItem.width
+       color: theme.highlightColor
+       y: listView.currentItem.y;
+       Behavior on y {
+         SpringAnimation { spring: 2; damping: 0.1 }
+       }
+     }
+   }
+
+  //channel list
   ListView {
     id: listView
     anchors.fill: parent
-    highlight: Rectangle {
-                color: theme.highlightColor
-                radius: 5
-                width: listView.currentItem.width
-              }
+    highlight: highlightBar
     highlightFollowsCurrentItem: true
     highlightMoveSpeed: 2000
     // concreate model
