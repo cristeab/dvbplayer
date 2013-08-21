@@ -5,6 +5,9 @@ Item {
   id: rootItem
   width: 320
   height: 5*(listView.currentItem.height+listView.spacing)-listView.spacing
+
+  property int oldIndex: -1
+
   //create process element
   Process {
     id: mplayer
@@ -37,12 +40,13 @@ Item {
                 MouseArea {
                   anchors.fill: parent
                   onDoubleClicked: {
-                    console.log('curIdx'+listView.currentIndex)
-                    console.log('index'+index)
-                    listView.currentIndex = index
-                    mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                     mplayer.kill()
-                    mplayer.start()
+                    if (oldIndex != index) {
+                      listView.currentIndex = index
+                      mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
+                      mplayer.start()
+                      oldIndex = index
+                    }
                   }
                 }
               }
