@@ -13,7 +13,7 @@ Item {
       console.log(readAllStandardError())
     }
     onReadyReadStandardOutput: {
-      console.log(readAllStandardOutput())
+      //console.log(readAllStandardOutput())
     }
   }
   ListView {
@@ -37,6 +37,8 @@ Item {
                 MouseArea {
                   anchors.fill: parent
                   onDoubleClicked: {
+                    console.log('curIdx'+listView.currentIndex)
+                    console.log('index'+index)
                     listView.currentIndex = index
                     mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                     mplayer.kill()
