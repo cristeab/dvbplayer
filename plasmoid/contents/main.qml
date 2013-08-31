@@ -5,7 +5,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
   id: rootItem
 
-  property int oldIndex: -1
+  property int oldIndex: -1 //used instead of ListView.currentIndex
 
   PlasmaCore.Theme {
     id: theme
@@ -20,6 +20,12 @@ Item {
     }
     onReadyReadStandardOutput: {
       //console.log(readAllStandardOutput())
+    }
+    onFinished: {
+      if (oldIndex == listView.currentIndex) {
+        listView.highlight = emptyHighlightBar
+        oldIndex = -1
+      }
     }
   }
 
@@ -63,16 +69,15 @@ Item {
                 MouseArea {
                   anchors.fill: parent
                   onDoubleClicked: {
-                    mplayer.kill()
                     if (oldIndex != index) {
                       listView.highlight = highlightBar
                       listView.currentIndex = index
+                      mplayer.kill()
+                      oldIndex = index //need to set oldIndex after kill
                       mplayer.arguments = ["-ao", "sdl", "dvb://"+channelItem.text]
                       mplayer.start()
-                      oldIndex = index
                     } else {
-                      listView.highlight = emptyHighlightBar
-                      oldIndex = -1
+                      mplayer.kill()
                     }
                   }
                 }
