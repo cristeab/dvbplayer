@@ -88,4 +88,12 @@ Item {
     keyNavigationWraps: true
     clip: true
   }
+
+  //plasmoid tooltip
+  PlasmaCore.ToolTip {
+    id: tooltip
+    target: rootItem
+    mainText: qsTr("DVB-T/DAB-T Player")
+    subText: qsTr("Found ")+listView.count+qsTr(" channels")
+  }
 }
