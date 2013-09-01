@@ -12,17 +12,19 @@ class Process::Private : public QProcess
 {
     Q_OBJECT
 public:
-    Private(Process *parent);
-    void wait() {
-      if (started) {
-        finishedEvt.exec();
-      }
+  Private(Process *parent);
+  void wait() {
+    if (started) {
+      finishedEvt.exec();
     }
+  }
+  bool programExists();
 
-    QString program;
-    QStringList arguments;
-    QStringList channels;
-    bool started;
+  QString program;
+  QStringList arguments;
+  QStringList channels;
+  QString errorMsg;
+  bool started;
 private slots:
   void onStarted() {
     qDebug() << "started";

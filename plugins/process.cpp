@@ -47,6 +47,11 @@ const QStringList &Process::channels() const
     return d->channels;
 }
 
+const QString &Process::errorMsg() const
+{
+    return d->errorMsg;
+}
+
 void Process::start()
 {
     d->start(d->program, d->arguments);
@@ -73,5 +78,10 @@ QByteArray Process::readAllStandardError()
 QByteArray Process::readAllStandardOutput()
 {
     return d->readAllStandardOutput();
+}
+
+bool Process::programExists()
+{
+  return d->programExists();
 }
 

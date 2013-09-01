@@ -19,15 +19,16 @@ Process::Private::Private(Process *parent)
 
 void Process::Private::loadChannels()
 {
+  channels.clear();//an empty list is used to signal an error
   QFile file("/etc/mplayer/channels.conf");
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qDebug() << "Cannot open file";
+    errorMsg = tr("Cannot open configuration file (")+file.fileName()+")";
     return;
   }
   QSet<QString> channelSet;
   QTextCodec *codec = QTextCodec::codecForLocale();
   if (NULL == codec) {
-    qDebug() << "Cannot get locale codec";
+    errorMsg = tr("Cannot get locale codec");
     return;
   }
   while (!file.atEnd()) {
@@ -38,4 +39,27 @@ void Process::Private::loadChannels()
   }
   channels = channelSet.toList();
   channels.sort();
+  if (channels.isEmpty()) {
+    errorMsg = tr("No channel found (configuration file might not have the expected format)");
+  } else {
+    errorMsg = "";//successful operation
+  }
 }
+
+bool Process::Private::programExists() {
+  QProcess proc;
+  QStringList args;
+  args << "-v";
+  proc.start(program, args);
+  proc.waitForFinished();
+  QString out = proc.readAllStandardOutput();
+  bool ok = true;
+  if (!out.contains(QRegExp("\\S+:\\s+mplayer"))) { //look for 'Usage:   mplayer'
+    ok = false;
+    errorMsg = tr("Cannot find ")+program;
+  } else {
+    errorMsg = "";
+  }
+  return ok;
+}
+

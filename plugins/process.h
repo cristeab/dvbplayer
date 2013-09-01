@@ -11,6 +11,7 @@ class Process : public QObject
     Q_PROPERTY(QString program READ program WRITE setProgram NOTIFY programChanged)
     Q_PROPERTY(QStringList arguments READ arguments WRITE setArguments NOTIFY argumentsChanged)
     Q_PROPERTY(QStringList channels READ channels NOTIFY channelsChanged)
+    Q_PROPERTY(QString errorMsg READ errorMsg NOTIFY errorMsgChanged)
 public:
     Process(QObject *parent = 0);
     ~Process();
@@ -18,9 +19,11 @@ public:
     const QString &program() const;
     const QStringList &arguments() const;
     const QStringList &channels() const;
+    const QString &errorMsg() const;
 
     Q_INVOKABLE QByteArray readAllStandardError();
     Q_INVOKABLE QByteArray readAllStandardOutput();
+    Q_INVOKABLE bool programExists();
 
 public slots:
     void setProgram(const QString &program);
@@ -34,13 +37,12 @@ signals:
     void programChanged(const QString &program);
     void argumentsChanged(const QStringList &arguments);
     void channelsChanged(const QStringList &channels);
+    void errorMsgChanged(const QString &errorMsg);
 
-//    void error(QProcess::ProcessError error )
     void finished(int exitCode);
     void readyReadStandardError();
     void readyReadStandardOutput();
     void started();
-//    void stateChanged(QProcess::ProcessState newState);
 
 private:
     class Private;

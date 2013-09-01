@@ -96,4 +96,26 @@ Item {
     mainText: qsTr("DVB-T/DAB-T Player")
     subText: qsTr("Found ")+listView.count+qsTr(" channels")
   }
+
+  //error handling
+  Component.onCompleted: {
+    if ((0 == listView.count) || !mplayer.programExists()) {
+      errMsg.text = qsTr("ERROR")+"<br>"+mplayer.errorMsg
+      errMsg.visible = true
+      console.log("Error message: "+mplayer.errorMsg)
+    }
+  }
+  Text {
+    id: errMsg
+    width: parent.width
+    anchors.centerIn: parent
+    font.pixelSize: 20
+    color: theme.textColor
+    horizontalAlignment: Text.AlignHCenter
+    visible: false
+    z: 1
+    clip: true
+    text: ""
+    wrapMode: Text.Wrap
+  }
 }
