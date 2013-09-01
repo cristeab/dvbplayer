@@ -1,9 +1,9 @@
 #include <QFile>
 #include <QSet>
 #include <QTextCodec>
-#include "process_p.h"
+#include "dvbplayer_p.h"
 
-Process::Private::Private(Process *parent)
+DVBPlayer::Private::Private(DVBPlayer *parent)
     : QProcess(parent)
     , started(false)
     , q(parent)
@@ -17,7 +17,7 @@ Process::Private::Private(Process *parent)
     loadChannels();
 }
 
-void Process::Private::loadChannels()
+void DVBPlayer::Private::loadChannels()
 {
   channels.clear();//an empty list is used to signal an error
   QFile file("/etc/mplayer/channels.conf");
@@ -46,7 +46,7 @@ void Process::Private::loadChannels()
   }
 }
 
-bool Process::Private::programExists() {
+bool DVBPlayer::Private::programExists() {
   QProcess proc;
   QStringList args;
   args << "-v";

@@ -1,68 +1,67 @@
-#include <QtCore/QProcess>
 #include <QEventLoop>
 #include <QFile>
 #include <QDebug>
 
-#include "process.h"
-#include "process_p.h"
+#include "dvbplayer.h"
+#include "dvbplayer_p.h"
 
 
-Process::Process(QObject *parent)
+DVBPlayer::DVBPlayer(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
 }
 
-Process::~Process()
+DVBPlayer::~DVBPlayer()
 {
   kill();
 }
 
-const QString &Process::program() const
+const QString &DVBPlayer::program() const
 {
     return d->program;
 }
 
-void Process::setProgram(const QString &program)
+void DVBPlayer::setProgram(const QString &program)
 {
     if (program == d->program) return;
     d->program = program;
     emit programChanged(d->program);
 }
 
-const QStringList &Process::arguments() const
+const QStringList &DVBPlayer::arguments() const
 {
     return d->arguments;
 }
 
-void Process::setArguments(const QStringList &arguments)
+void DVBPlayer::setArguments(const QStringList &arguments)
 {
     if (arguments == d->arguments) return;
     d->arguments = arguments;
     emit argumentsChanged(d->arguments);
 }
 
-const QStringList &Process::channels() const
+const QStringList &DVBPlayer::channels() const
 {
     return d->channels;
 }
 
-const QString &Process::errorMsg() const
+const QString &DVBPlayer::errorMsg() const
 {
     return d->errorMsg;
 }
 
-void Process::start()
+void DVBPlayer::start()
 {
     d->start(d->program, d->arguments);
 }
 
-void Process::terminate()
+void DVBPlayer::terminate()
 {
     d->terminate();
 }
 
-void Process::kill()
+void DVBPlayer::kill()
 {
     if (d->started) {
       d->kill();
@@ -70,17 +69,17 @@ void Process::kill()
     }
 }
 
-QByteArray Process::readAllStandardError()
+QByteArray DVBPlayer::readAllStandardError()
 {
     return d->readAllStandardError();
 }
 
-QByteArray Process::readAllStandardOutput()
+QByteArray DVBPlayer::readAllStandardOutput()
 {
     return d->readAllStandardOutput();
 }
 
-bool Process::programExists()
+bool DVBPlayer::programExists()
 {
   return d->programExists();
 }

@@ -4,17 +4,17 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-class Process : public QObject
+class DVBPlayer : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(Process)
+    Q_DISABLE_COPY(DVBPlayer)
     Q_PROPERTY(QString program READ program WRITE setProgram NOTIFY programChanged)
     Q_PROPERTY(QStringList arguments READ arguments WRITE setArguments NOTIFY argumentsChanged)
     Q_PROPERTY(QStringList channels READ channels NOTIFY channelsChanged)
     Q_PROPERTY(QString errorMsg READ errorMsg NOTIFY errorMsgChanged)
 public:
-    Process(QObject *parent = 0);
-    ~Process();
+    DVBPlayer(QObject *parent = 0);
+    ~DVBPlayer();
 
     const QString &program() const;
     const QStringList &arguments() const;

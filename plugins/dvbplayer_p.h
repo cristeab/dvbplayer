@@ -6,13 +6,13 @@
 #include <QStringList>
 #include <QDebug>
 #include <QEventLoop>
-#include "process.h"
+#include "dvbplayer.h"
 
-class Process::Private : public QProcess
+class DVBPlayer::Private : public QProcess
 {
     Q_OBJECT
 public:
-  Private(Process *parent);
+  Private(DVBPlayer *parent);
   void wait() {
     if (started) {
       finishedEvt.exec();
@@ -39,7 +39,7 @@ private slots:
   }
 private:
   void loadChannels();
-  Process *q;
+  DVBPlayer *q;
   QEventLoop finishedEvt;
 };
 

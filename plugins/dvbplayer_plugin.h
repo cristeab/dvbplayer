@@ -3,7 +3,7 @@
 
 #include <QtDeclarative/QDeclarativeExtensionPlugin>
 
-class QtProcessPlugin : public QDeclarativeExtensionPlugin
+class DVBPlayerPlugin : public QDeclarativeExtensionPlugin
 {
     Q_OBJECT
     

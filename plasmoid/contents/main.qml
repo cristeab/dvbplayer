@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import QtProcess 0.1
+import DVBPlayer 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
@@ -12,7 +12,7 @@ Item {
   }
 
   //create process element
-  Process {
+  DVBPlayer {
     id: mplayer
     program: "mplayer"
     onReadyReadStandardError: {
