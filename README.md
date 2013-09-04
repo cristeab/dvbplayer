@@ -39,4 +39,5 @@ In order to install the plasmoid in the local kde folder, from the main director
 
     cd plasmoid
     zip -r ../dvbplayer.plasmoid .
+    cd ..
     plasmapkg -i dvbplayer.plasmoid
